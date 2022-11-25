@@ -13,9 +13,9 @@ export default function Home({
   return (
     <div className={styles.container}>
       <main className={styles.main}>
+        <MoodGauge />
         <h1 className={styles.title}>{welcomeInformation.title}</h1>
         <p>{welcomeInformation.description}</p>
-        <MoodGauge />
       </main>
     </div>
   )
