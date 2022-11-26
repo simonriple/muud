@@ -1,10 +1,8 @@
-const mood = 1
-
 const width = 300
 const height = 180
 const radius = 100
 
-export const MoodGauge = () => {
+export const MoodGauge = ({ mood }: { mood: number }) => {
   const half = Math.PI * radius
   return (
     <svg width={width} height={height}>

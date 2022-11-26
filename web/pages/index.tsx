@@ -1,23 +1,21 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import client from '../client'
-import { WelcomeInformation } from '../model/welcomeInformation'
+import { WelcomeInformation } from '../models/welcomeInformation'
 import { MoodGauge } from '../modules/moodGauge'
-import styles from '../styles/Home.module.css'
+import { serverFetch } from '../utils/serverFetch'
 
 export default function Home({
   welcomeInformation,
+  prediction,
 }: {
   welcomeInformation: WelcomeInformation
+  prediction: number
 }) {
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <MoodGauge />
-        <h1 className={styles.title}>{welcomeInformation.title}</h1>
-        <p>{welcomeInformation.description}</p>
-      </main>
-    </div>
+    <>
+      <MoodGauge mood={prediction} />
+      <h1>{welcomeInformation.title}</h1>
+      <p>{welcomeInformation.description}</p>
+    </>
   )
 }
 
@@ -25,10 +23,14 @@ export async function getServerSideProps() {
   const welcomeInformation = await client.fetch(
     `*[_type == "welcomeInformation"][0]`
   )
+  const prediction = await serverFetch('/api/predictedMood').then((res) =>
+    res.json()
+  )
 
   return {
     props: {
       welcomeInformation,
+      prediction,
     },
   }
 }
