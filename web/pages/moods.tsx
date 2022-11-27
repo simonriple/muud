@@ -5,9 +5,6 @@ import { MoodDiagram } from '../modules/moodDiagram'
 import { serverFetch } from '../utils/serverFetch'
 
 function Moods({ moods }: { moods: IMood[] }) {
-  const data = moods.map((mood) => ({
-    value: mood.mood,
-  }))
   return (
     <>
       <h1>My moods</h1>
@@ -15,7 +12,7 @@ function Moods({ moods }: { moods: IMood[] }) {
         <button>Register mood</button>
       </Link>
       <div style={{ padding: 20 }}>
-        <MoodDiagram data={data} />
+        <MoodDiagram data={moods} />
       </div>
     </>
   )
