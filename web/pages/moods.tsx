@@ -1,4 +1,5 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
+import Link from 'next/link'
 import { IMood } from '../models/mood'
 import { MoodDiagram } from '../modules/moodDiagram'
 import { serverFetch } from '../utils/serverFetch'
@@ -10,7 +11,12 @@ function Moods({ moods }: { moods: IMood[] }) {
   return (
     <>
       <h1>My moods</h1>
-      <MoodDiagram data={data} />
+      <Link href='/register'>
+        <button>Register mood</button>
+      </Link>
+      <div style={{ padding: 20 }}>
+        <MoodDiagram data={data} />
+      </div>
     </>
   )
 }

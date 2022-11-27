@@ -1,11 +1,11 @@
 import { withApiAuthRequired } from '@auth0/nextjs-auth0'
 import RequestHandler from '../../middleware/requestHandler'
-import Mood from '../../models/mood'
+import Mood, { IMood } from '../../models/mood'
 
 const moodHandler = new RequestHandler()
 
 moodHandler.get = async (req, res) => {
-  const moods = await Mood.find({})
+  const moods = await Mood.find<IMood>({}).sort({ date: 'desc' })
   res.status(200).json(moods)
 }
 

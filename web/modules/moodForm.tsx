@@ -1,15 +1,17 @@
 import { useState } from 'react'
 import { IMood } from '../models/mood'
-
+import { SubmittingIcon } from './submittingIcon'
+const defaultValues = {
+  date: '',
+  mood: 0.5,
+  body: 0.5,
+  mind: 0.5,
+  exercise: false,
+  social: false,
+}
 export const MoodForm = () => {
-  const [values, setValues] = useState<IMood>({
-    date: '',
-    mood: 0.5,
-    body: 0.5,
-    mind: 0.5,
-    exercise: false,
-    social: false,
-  })
+  const [values, setValues] = useState<IMood>(defaultValues)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const onChange = (e: any) => {
     setValues((currValues) => ({
@@ -18,14 +20,17 @@ export const MoodForm = () => {
     }))
   }
 
-  const onSubmit = () => {
-    fetch('/api/mood', {
+  const onSubmit = async () => {
+    setIsSubmitting(true)
+    await fetch('/api/mood', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(values),
     })
+    setValues(defaultValues)
+    setIsSubmitting(false)
   }
 
   return (
@@ -110,7 +115,9 @@ export const MoodForm = () => {
           padding: '20px 0',
         }}
       >
-        <button onClick={onSubmit}>Submit</button>
+        <button onClick={onSubmit}>
+          {isSubmitting ? <SubmittingIcon /> : 'Submit'}
+        </button>
       </div>
     </div>
   )
