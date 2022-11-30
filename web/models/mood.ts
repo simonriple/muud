@@ -7,6 +7,7 @@ export interface IMood {
   mind: number
   exercise: boolean
   social: boolean
+  meds: boolean
   note?: string
 }
 
@@ -17,6 +18,7 @@ const MoodSchema = new mongoose.Schema<IMood>({
   mind: { type: Number, default: 0 },
   exercise: Boolean,
   social: Boolean,
+  meds: Boolean,
   note: String,
 })
 

@@ -108,6 +108,7 @@ export const MoodDiagram = ({ data }: { data: IMood[] }) => {
                         <p>Mind: {date?.mood?.mind}</p>
                         <p>Exercise: {date?.mood?.exercise}</p>
                         <p>Social: {date?.mood?.social}</p>
+                        <p>Meds: {date?.mood?.meds}</p>
                         <p>Note: {date?.mood?.note}</p>
                       </span>
                     )}

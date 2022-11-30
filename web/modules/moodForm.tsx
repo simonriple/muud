@@ -8,6 +8,7 @@ const defaultValues = {
   mind: 0.5,
   exercise: false,
   social: false,
+  meds: false,
 }
 export const MoodForm = () => {
   const [values, setValues] = useState<IMood>(defaultValues)
@@ -100,6 +101,20 @@ export const MoodForm = () => {
           setValues((currValues) => ({
             ...currValues,
             social: e.target.checked,
+          }))
+        }
+      />
+
+      <label>Meds</label>
+      <input
+        id='meds'
+        name='meds'
+        type='checkbox'
+        checked={values.meds}
+        onChange={(e) =>
+          setValues((currValues) => ({
+            ...currValues,
+            meds: e.target.checked,
           }))
         }
       />
